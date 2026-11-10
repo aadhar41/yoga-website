@@ -36,13 +36,14 @@ return new class extends Migration
 
         Schema::create('failed_jobs', function (Blueprint $table) {
             $table->id();
-            $table->string('uuid')->unique();
-            $table->string('connection');
-            $table->string('queue');
+            $table->string('uuid', 191)->unique(); // Explicitly set length for unique index
+            $table->string('connection', 100);     // Changed from text back to string with a 100-character limit
+            $table->string('queue', 100);          // Changed from text back to string with a 100-character limit
             $table->longText('payload');
             $table->longText('exception');
             $table->timestamp('failed_at')->useCurrent();
 
+            // The composite index will now safely pass the byte limit calculation
             $table->index(['connection', 'queue', 'failed_at']);
         });
     }
