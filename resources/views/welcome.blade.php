@@ -4,7 +4,35 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>{{ __('Welcome') }} - {{ config('app.name', 'Laravel') }}</title>
+        @php
+            $pageTitle = __("Let's get started").' - '.config('app.name', 'Laravel');
+            $pageDescription = 'Get started with Laravel and explore its ecosystem.';
+            $canonicalUrl = rtrim((string) config('app.url'), '/').'/';
+            $structuredData = json_encode([
+                '@context' => 'https://schema.org',
+                '@type' => 'WebSite',
+                'name' => config('app.name', 'Laravel'),
+                'description' => $pageDescription,
+                'url' => $canonicalUrl,
+            ], JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_AMP | JSON_HEX_QUOT | JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR);
+        @endphp
+
+        <title>{{ $pageTitle }}</title>
+        <meta name="description" content="{{ $pageDescription }}">
+        <link rel="canonical" href="{{ $canonicalUrl }}">
+
+        <meta property="og:type" content="website">
+        <meta property="og:site_name" content="{{ config('app.name', 'Laravel') }}">
+        <meta property="og:title" content="{{ $pageTitle }}">
+        <meta property="og:description" content="{{ $pageDescription }}">
+        <meta property="og:url" content="{{ $canonicalUrl }}">
+        <meta name="twitter:card" content="summary">
+        <meta name="twitter:title" content="{{ $pageTitle }}">
+        <meta name="twitter:description" content="{{ $pageDescription }}">
+
+        <script type="application/ld+json">
+            {!! $structuredData !!}
+        </script>
 
         <link rel="icon" href="/favicon.ico" sizes="any">
         <link rel="icon" href="/favicon.svg" type="image/svg+xml">

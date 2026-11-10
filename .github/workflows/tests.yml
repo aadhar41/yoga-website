@@ -12,6 +12,9 @@ permissions:
 jobs:
   ci:
     runs-on: ubuntu-latest
+    env:
+      DB_CONNECTION: sqlite
+      DB_DATABASE: database/ci.sqlite
 
     steps:
       - name: Checkout code
