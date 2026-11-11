@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Validation\Rules\Password;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\Gate;
+use App\Models\Permission;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -25,6 +27,15 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Schema::defaultStringLength(191);
+
+        // Owner passes every check
+        Gate::before(fn ($user) => $user->isOwner() ? true : null);
+
+        if (! app()->runningInConsole() || Schema::hasTable('permissions')) {
+            Permission::pluck('slug')->each(
+                fn (string $slug) => Gate::define($slug, fn ($user) => $user->hasPermission($slug))
+            );
+        }
     }
 
     /**
