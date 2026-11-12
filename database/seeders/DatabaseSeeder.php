@@ -1,11 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Database\Seeders;
 
+use App\Models\Role;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use App\Models\Role;
 use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
@@ -17,21 +19,37 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
-        // $this->call(RbacSeeder::class);
-
+        // 1. Seed Roles and Permissions first
         $this->call(RolePermissionSeeder::class);
 
+        // 2. Create or update the Owner account from .env
         $owner = User::updateOrCreate(
-            ['email' => env('OWNER_EMAIL')],
-            ['name' => env('OWNER_NAME'), 'password' => Hash::make(env('OWNER_PASSWORD')),
-            'email_verified_at' => now(), 'is_active' => true]
+            ['email' => env('OWNER_EMAIL', 'admin@yogawithdeepashree.com')],
+            [
+                'name' => env('OWNER_NAME', 'Yogacharya Deepashree Gaur'),
+                'password' => Hash::make(env('OWNER_PASSWORD', 'ChangeMe@123!')),
+                'email_verified_at' => now(),
+                'is_active' => true,
+            ]
         );
-        $owner->roles()->syncWithoutDetaching([Role::where('slug', 'owner')->value('id')]);
 
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-        ]);
+        $ownerRoleId = Role::where('slug', 'owner')->value('id');
+        if ($ownerRoleId) {
+            $owner->roles()->syncWithoutDetaching([$ownerRoleId]);
+        }
+
+        // 3. Seed Instructor Profile (for Owner), Programme Categories & Sample Programmes
+        $this->call(CoreDataSeeder::class);
+
+        // 4. Optional local test user
+        User::firstOrCreate(
+            ['email' => 'test@example.com'],
+            [
+                'name' => 'Test User',
+                'password' => Hash::make('password'),
+                'email_verified_at' => now(),
+                'is_active' => true,
+            ]
+        );
     }
 }
