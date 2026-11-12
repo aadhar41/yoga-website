@@ -4,16 +4,18 @@ declare(strict_types=1);
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 use App\Enums\ClassFormat;
 use App\Enums\ContentStatus;
+use Database\Factories\ProgrammeFactory;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Programme extends Model
 {
-    /** @use HasFactory<\Database\Factories\ProgrammeFactory> */
-    use HasFactory;
+    /** @use HasFactory<ProgrammeFactory> */
+    use HasFactory, SoftDeletes;
 
     protected $fillable = [
         'programme_category_id',

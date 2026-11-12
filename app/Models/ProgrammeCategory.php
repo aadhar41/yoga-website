@@ -4,14 +4,15 @@ declare(strict_types=1);
 
 namespace App\Models;
 
+use App\Enums\ContentStatus;
+use Database\Factories\ProgrammeCategoryFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Enums\ContentStatus;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class ProgrammeCategory extends Model
 {
-    /** @use HasFactory<\Database\Factories\ProgrammeCategoryFactory> */
+    /** @use HasFactory<ProgrammeCategoryFactory> */
     use HasFactory;
 
     protected $fillable = [
