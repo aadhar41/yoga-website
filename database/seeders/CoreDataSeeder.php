@@ -46,46 +46,10 @@ class CoreDataSeeder extends Seeder
             );
         }
 
-        // 2. Seed Core Programme Categories
-        $categories = [
-            [
-                'name' => 'Hatha Yoga',
-                'description' => 'Classical foundational postures (asanas), alignment, and mindful breathing for strength and balance.',
-            ],
-            [
-                'name' => 'Ashtanga',
-                'description' => 'Dynamic, structured sequences synchronizing breath with progressive movement.',
-            ],
-            [
-                'name' => 'Pranayama',
-                'description' => 'Traditional yogic breath regulation techniques to calm the nervous system and build vitality.',
-            ],
-            [
-                'name' => 'Specialised Wellness',
-                'description' => 'Tailored holistic sessions supporting stress relief, mobility, and restorative wellness.',
-            ],
-        ];
-
-        $seededCategories = [];
-
-        foreach ($categories as $index => $categoryData) {
-            $slug = Str::slug($categoryData['name']);
-
-            $seededCategories[$slug] = ProgrammeCategory::firstOrCreate(
-                ['slug' => $slug],
-                [
-                    'name' => $categoryData['name'],
-                    'description' => $categoryData['description'],
-                    'sort_order' => $index + 1,
-                    'status' => ContentStatus::Published,
-                ]
-            );
-        }
-
-        // 3. Seed Starter Programmes under the Categories
+        // 2. Seed Starter Programmes under the Categories
         $programmes = [
             [
-                'category_slug' => 'hatha-yoga',
+                'category_slug' => 'yoga-classes',
                 'title' => 'Foundational Hatha Yoga',
                 'short_description' => 'Build strength, flexibility, and body awareness through traditional asana practice.',
                 'overview' => 'Designed for beginners and returning practitioners, this programme focuses on proper alignment, steady breathing, and mindful transitions.',
@@ -100,7 +64,7 @@ class CoreDataSeeder extends Seeder
                 'is_featured' => true,
             ],
             [
-                'category_slug' => 'ashtanga',
+                'category_slug' => 'yoga-classes',
                 'title' => 'Ashtanga Primary Series Foundations',
                 'short_description' => 'A disciplined, breath-led flow cultivating focus, stamina, and internal heat.',
                 'overview' => 'Step-by-step instruction through Sun Salutations, standing postures, and foundational seated sequences of the Ashtanga tradition.',
@@ -130,7 +94,7 @@ class CoreDataSeeder extends Seeder
                 'is_featured' => true,
             ],
             [
-                'category_slug' => 'specialised-wellness',
+                'category_slug' => 'therapeutic-yoga',
                 'title' => 'Holistic Stress & Mobility Support',
                 'short_description' => 'Gentle, restorative yoga tailored for modern desk-bound lifestyles.',
                 'overview' => 'A supportive, low-impact practice combining gentle joint mobilization, restorative postures, and guided relaxation.',
@@ -146,8 +110,10 @@ class CoreDataSeeder extends Seeder
             ],
         ];
 
+        $seededCategories = ProgrammeCategory::all()->keyBy('slug');
+
         foreach ($programmes as $index => $item) {
-            $category = $seededCategories[$item['category_slug']] ?? null;
+            $category = $seededCategories->get($item['category_slug']);
 
             if (! $category) {
                 continue;

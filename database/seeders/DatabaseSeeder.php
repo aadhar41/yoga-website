@@ -38,10 +38,13 @@ class DatabaseSeeder extends Seeder
             $owner->roles()->syncWithoutDetaching([$ownerRoleId]);
         }
 
-        // 3. Seed Instructor Profile (for Owner), Programme Categories & Sample Programmes
+        // 3. Seed Programme Categories
+        $this->call(ProgrammeCategorySeeder::class);
+
+        // 4. Seed Instructor Profile (for Owner) & Sample Programmes
         $this->call(CoreDataSeeder::class);
 
-        // 4. Optional local test user
+        // 5. Optional local test user
         User::firstOrCreate(
             ['email' => 'test@example.com'],
             [
