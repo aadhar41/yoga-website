@@ -2,14 +2,14 @@
 
 namespace App\Providers;
 
+use App\Models\Permission;
 use Carbon\CarbonImmutable;
 use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Validation\Rules\Password;
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Support\Facades\Gate;
-use App\Models\Permission;
 
 class AppServiceProvider extends ServiceProvider
 {
