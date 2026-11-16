@@ -31,6 +31,7 @@ class ProgrammeCategory extends Model
         ];
     }
 
+    /** @return HasMany<Programme, $this> */
     public function programmes(): HasMany
     {
         return $this->hasMany(Programme::class);

@@ -2,9 +2,19 @@
 
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\StaffController;
+use App\Http\Controllers\Public\ClassScheduleController;
+use App\Http\Controllers\Public\HomeController;
+use App\Http\Controllers\Public\PageController;
+use App\Http\Controllers\Public\ProgrammeController;
 use Illuminate\Support\Facades\Route;
 
-Route::view('/', 'welcome')->name('home');
+Route::get('/', HomeController::class)->name('home');
+Route::get('/about', [PageController::class, 'about'])->name('about');
+Route::get('/expertise', [PageController::class, 'expertise'])->name('expertise');
+Route::get('/programmes', [ProgrammeController::class, 'index'])->name('programmes.index');
+Route::get('/programmes/{programme:slug}', [ProgrammeController::class, 'show'])->name('programmes.show');
+Route::get('/schedule', ClassScheduleController::class)->name('schedule');
+Route::view('/contact', 'public.contact')->name('contact');
 
 Route::get('/sitemap.xml', function () {
     $baseUrl = rtrim((string) config('app.url'), '/');

@@ -7,6 +7,8 @@ namespace App\Models;
 use App\Enums\ClassFormat;
 use App\Enums\ContentStatus;
 use Database\Factories\ProgrammeFactory;
+use Illuminate\Database\Eloquent\Attributes\Scope;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -44,6 +46,17 @@ class Programme extends Model
         ];
     }
 
+    /**
+     * @param  Builder<Programme>  $query
+     * @return Builder<Programme>
+     */
+    #[Scope]
+    protected function published(Builder $query): Builder
+    {
+        return $query->where('status', ContentStatus::Published->value);
+    }
+
+    /** @return BelongsTo<ProgrammeCategory, $this> */
     public function category(): BelongsTo
     {
         return $this->belongsTo(ProgrammeCategory::class, 'programme_category_id');

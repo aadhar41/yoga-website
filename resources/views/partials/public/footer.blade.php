@@ -13,11 +13,30 @@
             <div>
                 <h3 class="text-xs font-semibold uppercase tracking-wider text-[#C5A66D]">Explore</h3>
                 <ul class="mt-4 space-y-2.5 text-sm text-stone-300">
-                    <li><a href="{{ route('home') }}" class="hover:text-white transition">Home</a></li>
-                    <li><a href="{{ url('/about') }}" class="hover:text-white transition">About Us</a></li>
-                    <li><a href="{{ url('/programmes') }}" class="hover:text-white transition">Programmes</a></li>
-                    <li><a href="{{ url('/schedule') }}" class="hover:text-white transition">Class Schedule</a></li>
-                    <li><a href="{{ url('/contact') }}" class="hover:text-white transition">Contact & Enquiries</a></li>
+                    <li><a href="{{ route('home') }}"
+                    class="transition {{ request()->routeIs('home') ? 'text-[#29483C] font-semibold underline decoration-[#C5A66D] decoration-2 underline-offset-8' : 'text-stone-600 hover:text-[#29483C]' }}">
+                        Home
+                    </a></li>
+                                    <li><a href="{{ route('about') }}"
+                    class="transition {{ request()->routeIs('about') ? 'text-[#29483C] font-semibold underline decoration-[#C5A66D] decoration-2 underline-offset-8' : 'text-stone-600 hover:text-[#29483C]' }}">
+                        About
+                    </a></li>
+                                    <li><a href="{{ route('expertise') }}"
+                    class="transition {{ request()->routeIs('expertise') ? 'text-[#29483C] font-semibold underline decoration-[#C5A66D] decoration-2 underline-offset-8' : 'text-stone-600 hover:text-[#29483C]' }}">
+                        Specialised Wellness
+                    </a></li>
+                                    <li><a href="{{ route('programmes.index') }}"
+                    class="transition {{ request()->routeIs('programmes.*') ? 'text-[#29483C] font-semibold underline decoration-[#C5A66D] decoration-2 underline-offset-8' : 'text-stone-600 hover:text-[#29483C]' }}">
+                        Programmes
+                    </a></li>
+                                    <li><a href="{{ route('programmes.index') }}"
+                    class="transition {{ request()->routeIs('programmes.*') ? 'text-[#29483C] font-semibold underline decoration-[#C5A66D] decoration-2 underline-offset-8' : 'text-stone-600 hover:text-[#29483C]' }}">
+                        Programmes
+                    </a></li>
+                                    <li><a href="{{ route('schedule') }}"
+                    class="transition {{ request()->routeIs('schedule') ? 'text-[#29483C] font-semibold underline decoration-[#C5A66D] decoration-2 underline-offset-8' : 'text-stone-600 hover:text-[#29483C]' }}">
+                        Schedule
+                    </a></li>
                 </ul>
             </div>
 
