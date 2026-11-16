@@ -9,10 +9,10 @@ test('homepage renders canonical social and structured data metadata', function 
     $response = $this->get(route('home'));
 
     $response->assertOk()
-        ->assertSee('<title>Let&#039;s get started - Test Site</title>', false)
+        ->assertSee('<title>Test Site — Authentic Yoga &amp; Holistic Wellness</title>', false)
         ->assertSee('<link rel="canonical" href="https://example.test/">', false)
-        ->assertSee('<meta name="description" content="Get started with Laravel and explore its ecosystem.">', false)
-        ->assertSee('<meta property="og:title" content="Let&#039;s get started - Test Site">', false)
+        ->assertSee('<meta name="description" content="Traditional Hatha, Vinyasa, Pranayama, and restorative meditation sessions guided with mindful precision.">', false)
+        ->assertSee('<meta property="og:title" content="Test Site — Authentic Yoga &amp; Holistic Wellness">', false)
         ->assertSee('<meta property="og:url" content="https://example.test/">', false)
         ->assertSee('<meta name="twitter:card" content="summary">', false)
         ->assertSee('application/ld+json', false)

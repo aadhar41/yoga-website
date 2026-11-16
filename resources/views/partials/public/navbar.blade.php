@@ -79,39 +79,32 @@
          @click.away="mobileMenuOpen = false"
          style="display: none;"
          class="md:hidden bg-[#FAF8F2] border-b border-stone-200 px-4 pt-3 pb-6 shadow-lg">
-        <nav aria-label="Mobile" class="flex flex-col space-y-2 text-base font-medium">
-            <a href="{{ route('home') }}" @click="mobileMenuOpen = false"
-               class="px-3 py-2.5 rounded-lg {{ request()->routeIs('home') ? 'bg-[#82977B]/20 text-[#29483C] font-semibold' : 'text-stone-700 hover:bg-stone-200/50' }}">
+        <!-- Desktop Navigation in resources/views/partials/public/navbar.blade.php -->
+        <nav aria-label="Primary" class="hidden md:flex items-center gap-7 text-sm font-medium">
+            <a href="{{ route('home') }}"
+            class="transition {{ request()->routeIs('home') ? 'text-[#29483C] font-semibold underline decoration-[#C5A66D] decoration-2 underline-offset-8' : 'text-stone-600 hover:text-[#29483C]' }}">
                 Home
             </a>
-            <a href="{{ url('/about') }}" @click="mobileMenuOpen = false"
-               class="px-3 py-2.5 rounded-lg {{ request()->is('about*') ? 'bg-[#82977B]/20 text-[#29483C] font-semibold' : 'text-stone-700 hover:bg-stone-200/50' }}">
+            <a href="{{ route('about') }}"
+            class="transition {{ request()->routeIs('about') ? 'text-[#29483C] font-semibold underline decoration-[#C5A66D] decoration-2 underline-offset-8' : 'text-stone-600 hover:text-[#29483C]' }}">
                 About
             </a>
-            <a href="{{ url('/programmes') }}" @click="mobileMenuOpen = false"
-               class="px-3 py-2.5 rounded-lg {{ request()->is('programmes*') ? 'bg-[#82977B]/20 text-[#29483C] font-semibold' : 'text-stone-700 hover:bg-stone-200/50' }}">
+            <a href="{{ route('expertise') }}"
+            class="transition {{ request()->routeIs('expertise') ? 'text-[#29483C] font-semibold underline decoration-[#C5A66D] decoration-2 underline-offset-8' : 'text-stone-600 hover:text-[#29483C]' }}">
+                Specialised Wellness
+            </a>
+            <a href="{{ route('programmes.index') }}"
+            class="transition {{ request()->routeIs('programmes.*') ? 'text-[#29483C] font-semibold underline decoration-[#C5A66D] decoration-2 underline-offset-8' : 'text-stone-600 hover:text-[#29483C]' }}">
                 Programmes
             </a>
-            <a href="{{ url('/schedule') }}" @click="mobileMenuOpen = false"
-               class="px-3 py-2.5 rounded-lg {{ request()->is('schedule*') ? 'bg-[#82977B]/20 text-[#29483C] font-semibold' : 'text-stone-700 hover:bg-stone-200/50' }}">
+            <a href="{{ route('schedule') }}"
+            class="transition {{ request()->routeIs('schedule') ? 'text-[#29483C] font-semibold underline decoration-[#C5A66D] decoration-2 underline-offset-8' : 'text-stone-600 hover:text-[#29483C]' }}">
                 Schedule
             </a>
-            <a href="{{ url('/contact') }}" @click="mobileMenuOpen = false"
-               class="px-3 py-2.5 rounded-lg {{ request()->is('contact*') ? 'bg-[#82977B]/20 text-[#29483C] font-semibold' : 'text-stone-700 hover:bg-stone-200/50' }}">
+            <a href="{{ route('contact') }}"
+            class="transition {{ request()->routeIs('contact') ? 'text-[#29483C] font-semibold underline decoration-[#C5A66D] decoration-2 underline-offset-8' : 'text-stone-600 hover:text-[#29483C]' }}">
                 Contact
             </a>
-
-            <div class="pt-3 border-t border-stone-200 flex flex-col gap-2">
-                @auth
-                    <a href="{{ route('admin.dashboard') }}" class="px-3 py-2 text-sm text-stone-600 hover:text-[#29483C]">
-                        Admin Dashboard →
-                    </a>
-                @endauth
-                <a href="{{ url('/contact') }}" @click="mobileMenuOpen = false"
-                   class="w-full text-center px-5 py-3 rounded-full bg-[#29483C] text-[#FAF8F2] text-sm font-medium hover:bg-[#1f372e]">
-                    Book a Class
-                </a>
-            </div>
         </nav>
     </div>
 </header>
