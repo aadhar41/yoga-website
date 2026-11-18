@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\StaffController;
+use App\Http\Controllers\Public\BookingController;
 use App\Http\Controllers\Public\ClassScheduleController;
 use App\Http\Controllers\Public\HomeController;
 use App\Http\Controllers\Public\PageController;
@@ -14,6 +15,7 @@ Route::get('/expertise', [PageController::class, 'expertise'])->name('expertise'
 Route::get('/programmes', [ProgrammeController::class, 'index'])->name('programmes.index');
 Route::get('/programmes/{programme:slug}', [ProgrammeController::class, 'show'])->name('programmes.show');
 Route::get('/schedule', ClassScheduleController::class)->name('schedule');
+Route::post('/bookings', [BookingController::class, 'store'])->name('bookings.store');
 Route::view('/contact', 'public.contact')->name('contact');
 
 Route::get('/sitemap.xml', function () {
