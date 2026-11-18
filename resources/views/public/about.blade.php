@@ -40,24 +40,22 @@
             </div>
 
             <div class="lg:col-span-5">
-                <div class="rounded-2xl bg-white border border-stone-200/80 p-8 shadow-2xs space-y-6">
+                <div class="rounded-2xl bg-white border border-stone-200/80 p-8 shadow-xs space-y-6">
                     @if ($instructor?->headshot_path)
                         <img src="{{ Storage::url($instructor->headshot_path) }}"
                              alt="{{ $instructorName }}"
-                             class="w-full aspect-[4/3] object-cover rounded-xl">
+                             class="w-full aspect-[4/3] object-cover rounded-xl shadow-sm">
                     @else
-                        <div class="w-full aspect-[4/3] rounded-xl bg-[#29483C]/10 border border-[#82977B]/30 flex items-center justify-center p-6 text-center">
-                            <p class="font-serif italic text-xl text-[#29483C]">
-                                “Steadiness and ease in every posture, clarity in every breath.”
-                            </p>
-                        </div>
+                        <img src="{{ asset('images/about/deepashree-profile.png') }}"
+                             alt="{{ $instructorName }}"
+                             class="w-full aspect-[4/3] object-cover rounded-xl shadow-sm">
                     @endif
 
                     <dl class="grid grid-cols-2 gap-4 pt-2 border-t border-stone-100">
                         <div>
                             <dt class="text-xs uppercase tracking-wider text-stone-500">Experience</dt>
                             <dd class="mt-1 font-serif text-2xl font-semibold text-[#29483C]">
-                                {{ $instructor?->years_of_experience ? $instructor->years_of_experience . '+ Years' : 'Dedicated' }}
+                                {{ $instructor?->years_of_experience ? $instructor->years_of_experience . '+ Years' : '10+ Years' }}
                             </dd>
                         </div>
                         <div>
@@ -94,38 +92,29 @@
             </div>
 
             {{-- Certifications & Qualifications --}}
-            <div class="bg-white rounded-2xl border border-stone-200 p-6 sm:p-8 shadow-2xs">
+            <div class="bg-white rounded-2xl border border-stone-200 p-6 sm:p-8 shadow-xs">
                 <p class="text-xs font-semibold uppercase tracking-[0.2em] text-[#82977B]">Credentials</p>
                 <h2 class="mt-2 font-serif text-2xl font-semibold text-[#29483C]">
                     Qualifications &amp; Training
                 </h2>
 
-                @if (!empty($instructor?->qualifications))
-                    <ul class="mt-6 space-y-3.5 text-sm sm:text-base text-stone-700">
-                        @foreach ((array) $instructor->qualifications as $cert)
-                            <li class="flex items-start gap-3">
-                                <span class="mt-2 w-2 h-2 rounded-full bg-[#C5A66D] shrink-0"></span>
-                                <span>{{ is_array($cert) ? ($cert['title'] ?? implode(' — ', $cert)) : $cert }}</span>
-                            </li>
-                        @endforeach
-                    </ul>
-                @else
-                    <ul class="mt-6 space-y-3.5 text-sm sm:text-base text-stone-700">
-                        <li class="flex items-start gap-3">
-                            <span class="mt-2 w-2 h-2 rounded-full bg-[#C5A66D] shrink-0"></span>
-                            <span>Classical Hatha Yoga &amp; Pranayama Teacher Training</span>
-                        </li>
-                        <li class="flex items-start gap-3">
-                            <span class="mt-2 w-2 h-2 rounded-full bg-[#C5A66D] shrink-0"></span>
-                            <span>Therapeutic Yoga &amp; Restorative Alignment Certification</span>
-                        </li>
-                        <li class="flex items-start gap-3">
-                            <span class="mt-2 w-2 h-2 rounded-full bg-[#C5A66D] shrink-0"></span>
-                            <span>Meditation &amp; Yogic Philosophy Studies</span>
-                        </li>
-                    </ul>
-                @endif
+                <ul class="mt-6 space-y-3.5 text-sm sm:text-base text-stone-700">
+                    <li class="flex items-start gap-3">
+                        <span class="mt-2 w-2 h-2 rounded-full bg-[#C5A66D] shrink-0"></span>
+                        <span>MA in Yogic Science</span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <span class="mt-2 w-2 h-2 rounded-full bg-[#C5A66D] shrink-0"></span>
+                        <span>200-Hour TTC – Certified Yoga Teacher</span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <span class="mt-2 w-2 h-2 rounded-full bg-[#C5A66D] shrink-0"></span>
+                        <span>Therapeutic Yoga &amp; Restorative Alignment Certification</span>
+                    </li>
+                </ul>
             </div>
+
+            <x-public.disclaimer />
 
             {{-- Call to Action --}}
             <div class="rounded-2xl bg-[#82977B]/15 border border-[#82977B]/40 p-8 flex flex-col sm:flex-row sm:items-center justify-between gap-6">
