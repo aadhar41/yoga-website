@@ -33,42 +33,43 @@
         </script>
     </x-slot:meta>
 
-    {{-- 1. HERO --}}
-    <section class="relative overflow-hidden py-20 sm:py-28 border-b border-stone-200/70">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+    {{-- 1. HERO WITH EDITORIAL BACKGROUND IMAGE --}}
+    <section class="relative overflow-hidden py-24 sm:py-32 bg-[#29483C] text-[#FAF8F2] border-b border-stone-200/70">
+        <div class="absolute inset-0 z-0 opacity-25 mix-blend-overlay">
+            <img src="{{ asset('images/hero/yoga-hero-sunrise.jpg') }}" alt="Sunrise Yoga Practice" class="w-full h-full object-cover">
+        </div>
+        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             <div class="lg:col-span-7">
-                <p class="text-xs font-semibold uppercase tracking-[0.2em] text-[#82977B]">
+                <p class="text-xs font-semibold uppercase tracking-[0.2em] text-[#C5A66D]">
                     Traditional Practice &bull; Holistic Wellness
                 </p>
-                <h1 class="mt-4 font-serif text-4xl sm:text-5xl lg:text-6xl font-semibold tracking-tight text-[#29483C] leading-[1.12]">
+                <h1 class="mt-4 font-serif text-4xl sm:text-5xl lg:text-6xl font-semibold tracking-tight text-white leading-[1.12]">
                     Grounded movement, conscious breath, and lasting stillness.
                 </h1>
-                <p class="mt-6 text-base sm:text-lg text-stone-600 leading-relaxed max-w-2xl">
+                <p class="mt-6 text-base sm:text-lg text-stone-200 leading-relaxed max-w-2xl">
                     Personalized Hatha, Vinyasa, Pranayama, and restorative meditation programmes rooted in classical yogic lineage for daily balance and resilience.
                 </p>
                 <div class="mt-8 flex flex-wrap items-center gap-4">
                     <a href="{{ route('programmes.index') }}"
-                       class="px-7 py-3.5 rounded-full bg-[#29483C] text-[#FAF8F2] text-sm font-medium hover:bg-[#1f372e] transition shadow-xs">
+                       class="px-7 py-3.5 rounded-full bg-[#FAF8F2] text-[#29483C] text-sm font-medium hover:bg-white transition shadow-xs">
                         Explore Programmes
                     </a>
                     <a href="{{ route('contact') }}"
-                       class="px-7 py-3.5 rounded-full border border-[#29483C] text-[#29483C] text-sm font-medium hover:bg-[#82977B]/15 transition">
+                       class="px-7 py-3.5 rounded-full border border-white/40 text-white text-sm font-medium hover:bg-white/10 transition">
                         Enquire Now
                     </a>
                 </div>
             </div>
 
             <div class="lg:col-span-5">
-                <div class="aspect-[4/5] rounded-2xl bg-[#29483C]/10 border border-[#82977B]/30 p-8 flex flex-col justify-between">
-                    <span class="inline-block w-fit px-3 py-1 rounded-full bg-[#FAF8F2] text-xs font-medium text-[#29483C]">
-                        Morning &amp; Evening Batches
-                    </span>
-                    <div>
-                        <p class="font-serif italic text-2xl text-[#29483C] leading-snug">
+                <div class="overflow-hidden rounded-2xl shadow-xl border border-white/10 relative aspect-[4/5]">
+                    <img src="{{ asset('images/about/deepashree-profile.png') }}" alt="Yogacharya Deepashree Gaur" class="w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-[#29483C]/90 via-transparent to-transparent flex flex-col justify-end p-6">
+                        <span class="inline-block w-fit px-3 py-1 rounded-full bg-white/20 backdrop-blur-md text-xs font-medium text-white mb-2">
+                            Certified Instructor
+                        </span>
+                        <p class="font-serif italic text-xl text-white">
                             “Yoga is the settling of the mind into silence.”
-                        </p>
-                        <p class="mt-3 text-xs uppercase tracking-wider text-stone-600">
-                            Patanjali Yoga Sutras 1.2
                         </p>
                     </div>
                 </div>
@@ -88,7 +89,7 @@
 
             <div class="mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 @forelse ($categories as $category)
-                    <div class="bg-white rounded-2xl border border-stone-200/80 p-6 shadow-2xs">
+                    <div class="bg-white rounded-2xl border border-stone-200/80 p-6 shadow-2xl shadow-stone-200/40">
                         <h3 class="font-serif text-xl font-semibold text-[#29483C]">{{ $category->name }}</h3>
                         <p class="mt-2 text-sm text-stone-600 leading-relaxed">
                             {{ $category->description ?? 'Structured guidance tailored to individual capacity, alignment, and breath awareness.' }}
@@ -100,7 +101,7 @@
                         ['title' => 'Pranayama & Breathwork', 'desc' => 'Systematic breath regulation practices to calm the nervous system and sharpen mental clarity.'],
                         ['title' => 'Restorative & Yoga Nidra', 'desc' => 'Deeply restful guided sessions for stress recovery, better sleep, and emotional equilibrium.'],
                     ] as $service)
-                        <div class="bg-white rounded-2xl border border-stone-200/80 p-6 shadow-2xs">
+                        <div class="bg-white rounded-2xl border border-stone-200/80 p-6 shadow-2xl shadow-stone-200/40">
                             <h3 class="font-serif text-xl font-semibold text-[#29483C]">{{ $service['title'] }}</h3>
                             <p class="mt-2 text-sm text-stone-600 leading-relaxed">{{ $service['desc'] }}</p>
                         </div>
@@ -127,8 +128,11 @@
 
             <div class="mt-10 grid grid-cols-1 md:grid-cols-3 gap-8">
                 @forelse ($featuredProgrammes as $programme)
-                    <article class="rounded-2xl bg-[#FAF8F2] border border-stone-200/80 p-6 flex flex-col justify-between">
-                        <div>
+                    <article class="rounded-2xl bg-[#FAF8F2] border border-stone-200/80 overflow-hidden flex flex-col justify-between shadow-xs">
+                        <div class="aspect-[16/9] overflow-hidden">
+                            <img src="{{ asset('images/programmes/hatha-studio.png') }}" alt="{{ $programme->title }}" class="w-full h-full object-cover">
+                        </div>
+                        <div class="p-6">
                             @if ($programme->category)
                                 <span class="text-xs font-semibold uppercase tracking-wider text-[#82977B]">
                                     {{ $programme->category->name }}
@@ -143,7 +147,7 @@
                                 {{ $programme->short_description ?? $programme->overview }}
                             </p>
                         </div>
-                        <div class="mt-6 pt-4 border-t border-stone-200/80 flex items-center justify-between text-xs text-stone-500">
+                        <div class="px-6 pb-6 pt-2 flex items-center justify-between text-xs text-stone-500">
                             <span>{{ $programme->level ?? 'All Levels' }}</span>
                             <a href="{{ route('programmes.show', $programme) }}" class="font-medium text-[#29483C] hover:underline">
                                 Details &rarr;
@@ -189,7 +193,7 @@
                 </div>
             </div>
 
-            <div class="lg:col-span-5 bg-white rounded-2xl border border-stone-200 p-8">
+            <div class="lg:col-span-5 bg-white rounded-2xl border border-stone-200 p-8 shadow-xs">
                 <dl class="grid grid-cols-2 gap-6">
                     <div>
                         <dt class="text-xs uppercase tracking-wider text-stone-500">Experience</dt>
