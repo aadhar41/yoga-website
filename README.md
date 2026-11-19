@@ -1,40 +1,101 @@
-# Yoga Website
+# Yoga with Deepashree
 
-A Laravel application using Livewire and Blade. The current public homepage is the Laravel welcome screen; authenticated dashboard and account settings come from the Livewire starter kit.
+A yoga and holistic-wellness website built with Laravel, Livewire, and Blade. It includes a public programme and class-booking experience, plus an authenticated area for managing instructor information, media, and staff access.
+
+## Features
+
+### Public website
+
+- Homepage with studio offerings, featured programmes, instructor information, and enquiry links
+- About and specialised-wellness pages
+- Programme catalogue grouped by category, with individual programme details
+- Class schedule and public booking-request form
+- Contact page, canonical metadata, `robots.txt`, and `sitemap.xml`
+
+### Admin area
+
+- Authenticated admin area at `/admin`
+- Instructor profile editor for biography, qualifications, portrait, and publication status
+- Media library for uploading, browsing, copying URLs, and deleting images
+- Staff directory and staff creation, restricted by the `manage-staff` permission
+- Standard account settings and authentication features from the Laravel starter kit
+
+Booking requests can be submitted from the public website. Admin booking review and management are not currently implemented.
+
+## Screenshots
+
+These screenshots show the public website using local application content.
+
+<p>
+  <img src="docs/screenshots/homepage.png" alt="Yoga with Deepashree homepage" width="720">
+</p>
+
+<p>
+  <img src="docs/screenshots/about.png" alt="About the instructor and yoga practice" width="720">
+</p>
+
+<p>
+  <img src="docs/screenshots/programmes.png" alt="Programme catalogue grouped by category" width="720">
+</p>
 
 ## Stack and tools
 
 - PHP 8.3+ and Laravel 13
 - Livewire 4, Blade, and Flux UI
 - Tailwind CSS 4 and Vite Plus for frontend assets
-- MySQL configured by default in `.env.example`; tests use in-memory SQLite
+- MySQL by default in `.env.example`; tests use in-memory SQLite
 - Pest for tests, Pint for formatting, and Larastan/PHPStan for static analysis
 
 ## Setup
 
-1. Clone this repository from its GitHub URL and open the project directory.
-2. Copy `.env.example` to `.env` and set the database connection details.
-3. Install dependencies and initialize the application:
+Requirements: PHP 8.3+, Composer, Node.js/npm, and a MySQL server (or another database configured in `.env`).
+
+1. Clone the repository and open the project directory.
+2. Create the database configured by `DB_DATABASE` in `.env.example` (default: `yoga_website`).
+3. Copy `.env.example` to `.env` and set the database connection details:
 
    ```sh
-   composer install
-   php artisan key:generate
-   php artisan migrate
-   npm ci
-   npm run build
+   cp .env.example .env
    ```
 
-4. Start the local application:
+   In Windows PowerShell, use `Copy-Item .env.example .env`.
+4. Install dependencies, generate the application key, migrate the database, and build frontend assets:
+
+   ```sh
+   composer setup
+   ```
+
+   The setup script creates `.env` if it does not exist. Configure the database before running it.
+5. To load local sample content and create the owner account, set `OWNER_NAME`, `OWNER_EMAIL`, and a unique `OWNER_PASSWORD` in `.env`, then run:
+
+   ```sh
+   php artisan db:seed
+   ```
+
+   Seeding is intended for local development; do not use development seed data in production.
+6. Start the local application:
 
    ```sh
    composer run dev
    ```
+
+Sign in with the owner email and password configured for the seeder to access the admin area.
+
+## Admin workflows
+
+After signing in with an active account:
+
+1. Open `/admin` to enter the admin area.
+2. Open `/admin/profile` to update the instructor biography, qualifications, portrait, and public visibility.
+3. Open `/admin/media` to upload supported images, copy their public URLs, or delete them.
+4. Users with the `manage-staff` permission can open `/admin/staff` to view the staff directory and create staff accounts.
 
 ## Useful commands
 
 | Command | Purpose |
 | --- | --- |
 | `composer run dev` | Run Laravel, the queue listener, and Vite for development |
+| `composer setup` | Install dependencies, initialize the app, migrate, and build assets |
 | `npm run build` | Build production frontend assets |
 | `composer ci:check` | Run Pint checks, PHPStan, and the Pest suite |
 | `composer test` | Run the project's combined checks and tests |
@@ -42,17 +103,18 @@ A Laravel application using Livewire and Blade. The current public homepage is t
 
 ## Structure and conventions
 
-- `routes/web.php` contains the public homepage and dashboard routes.
-- `routes/settings.php` contains authenticated account settings and the passkey discovery endpoint.
-- `app/Livewire` and `resources/views/pages` contain Livewire features; reusable layouts and Blade components are in `resources/views`.
-- `app/Models` contains Eloquent models. Follow the existing Laravel, Livewire, Blade, and Flux patterns.
+- `routes/web.php` defines public routes and the admin middleware group.
+- `routes/admin.php` defines admin, instructor profile, media, and staff routes.
+- `routes/settings.php` contains authenticated account settings and the passkey discovery route.
+- `app/Http/Controllers` and `app/Http/Requests` contain HTTP controllers and request validation.
+- `app/Models` contains Eloquent models; Livewire features and reusable Blade views follow the existing Laravel and Livewire patterns.
 - Keep credentials in the local `.env`; never commit environment secrets.
 
 ## SEO and production configuration
 
-The homepage is currently the only indexable page. `/sitemap.xml` lists that route, and `/robots.txt` points to the sitemap while excluding dashboard, settings, and technical endpoints. Add public routes to the sitemap only when they are intended to be indexed.
+The application generates canonical URLs from `APP_URL`. `/sitemap.xml` currently lists the homepage only; add other public pages there when they are intended to be indexed. `/robots.txt` points to the sitemap and excludes dashboard, settings, and technical endpoints.
 
-Set `APP_URL` to the canonical production origin in the deployment environment. The homepage canonical URL, sitemap URLs, and robots sitemap reference use this value. Set `APP_NAME` to the public site name before launch. The repository has a GitHub Actions checks workflow but no deployment platform configuration or automated deployment workflow.
+Set `APP_URL` to the canonical production origin and `APP_NAME` to the public site name before launch. The repository has a GitHub Actions checks workflow but no deployment platform configuration or automated deployment workflow.
 
 ## Community and licensing
 
