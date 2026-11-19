@@ -1,7 +1,5 @@
 <?php
 
-use App\Http\Controllers\Admin\DashboardController;
-use App\Http\Controllers\Admin\StaffController;
 use App\Http\Controllers\Public\BookingController;
 use App\Http\Controllers\Public\ClassScheduleController;
 use App\Http\Controllers\Public\HomeController;
@@ -48,13 +46,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
 });
 
 Route::prefix('admin')->name('admin.')->middleware(['auth', 'active'])->group(function () {
-    Route::get('/', DashboardController::class)->name('dashboard');
 
-    Route::prefix('staff')->name('staff.')->middleware('can:manage-staff')->group(function () {
-        Route::get('/', [StaffController::class, 'index'])->name('index');
-        Route::get('/create', [StaffController::class, 'create'])->name('create');
-        Route::post('/', [StaffController::class, 'store'])->name('store');
-    });
+    require __DIR__.'/admin.php';
 });
 
 require __DIR__.'/settings.php';
