@@ -9,11 +9,16 @@ use App\Enums\ContentStatus;
 use Database\Factories\ProgrammeFactory;
 use Illuminate\Database\Eloquent\Attributes\Scope;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
+/**
+ * @property ContentStatus $status
+ * @property-read bool $is_published
+ */
 class Programme extends Model
 {
     /** @use HasFactory<ProgrammeFactory> */
@@ -44,6 +49,12 @@ class Programme extends Model
             'is_featured' => 'boolean',
             'sort_order' => 'integer',
         ];
+    }
+
+    /** @return Attribute<bool, never> */
+    protected function isPublished(): Attribute
+    {
+        return Attribute::get(fn (): bool => $this->status === ContentStatus::Published);
     }
 
     /**
