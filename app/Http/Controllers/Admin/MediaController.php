@@ -14,7 +14,7 @@ class MediaController extends Controller
     {
         $disk = Storage::disk('public');
         $files = collect($disk->allFiles())
-            ->filter(fn ($path) => preg_match('/\.(jpg|jpeg|png|webp)$/i', $path))
+            ->filter(fn (string $path): bool => preg_match('/\.(jpg|jpeg|png|webp)$/i', $path) === 1)
             ->map(fn ($path) => [
                 'path' => $path,
                 'url' => $disk->url($path),

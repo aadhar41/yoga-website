@@ -33,8 +33,10 @@ class ProfileController extends Controller
         $data = $request->safe()->except(['headshot', 'qualifications']);
 
         // Convert newline-separated qualifications into clean array
-        $data['qualifications'] = collect(preg_split('/\r\n|\r|\n/', (string) $request->input('qualifications')))
-            ->map(fn ($line) => trim($line))
+        $qualifications = str_replace(["\r\n", "\r"], "\n", (string) $request->input('qualifications'));
+
+        $data['qualifications'] = collect(explode("\n", $qualifications))
+            ->map(fn (string $line): string => trim($line))
             ->filter()
             ->values()
             ->all();

@@ -15,6 +15,12 @@ return [
 
     'name' => env('APP_NAME', 'Laravel'),
 
+    'owner' => [
+        'name' => env('OWNER_NAME', 'Yogacharya Deepashree Gaur'),
+        'email' => env('OWNER_EMAIL', 'admin@yogawithdeepashree.com'),
+        'password' => env('OWNER_PASSWORD', 'ChangeMe@123!'),
+    ],
+
     /*
     |--------------------------------------------------------------------------
     | Application Environment
