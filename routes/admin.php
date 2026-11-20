@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\MediaController;
 use App\Http\Controllers\Admin\ProfileController;
+use App\Http\Controllers\Admin\ProgrammeController;
 use App\Http\Controllers\Admin\StaffController;
 use Illuminate\Support\Facades\Route;
 
@@ -22,3 +23,5 @@ Route::prefix('staff')->name('staff.')->middleware('can:manage-staff')->group(fu
     Route::get('/create', [StaffController::class, 'create'])->name('create');
     Route::post('/', [StaffController::class, 'store'])->name('store');
 });
+
+Route::resource('programmes', ProgrammeController::class)->except(['show']);
