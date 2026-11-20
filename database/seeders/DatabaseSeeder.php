@@ -9,6 +9,7 @@ use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
+use InvalidArgumentException;
 
 class DatabaseSeeder extends Seeder
 {
@@ -22,12 +23,20 @@ class DatabaseSeeder extends Seeder
         // 1. Seed Roles and Permissions first
         $this->call(RolePermissionSeeder::class);
 
-        // 2. Create or update the Owner account from .env
+        $ownerName = config('app.owner.name');
+        $ownerEmail = config('app.owner.email');
+        $ownerPassword = config('app.owner.password');
+
+        if (! is_string($ownerName) || ! is_string($ownerEmail) || ! is_string($ownerPassword)) {
+            throw new InvalidArgumentException('Owner seed configuration values must be strings.');
+        }
+
+        // 2. Create or update the Owner account
         $owner = User::updateOrCreate(
-            ['email' => env('OWNER_EMAIL', 'admin@yogawithdeepashree.com')],
+            ['email' => $ownerEmail],
             [
-                'name' => env('OWNER_NAME', 'Yogacharya Deepashree Gaur'),
-                'password' => Hash::make(env('OWNER_PASSWORD', 'ChangeMe@123!')),
+                'name' => $ownerName,
+                'password' => Hash::make($ownerPassword),
                 'email_verified_at' => now(),
                 'is_active' => true,
             ]

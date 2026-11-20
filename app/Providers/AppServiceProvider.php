@@ -31,6 +31,24 @@ class AppServiceProvider extends ServiceProvider
         // Owner passes every check
         Gate::before(fn ($user) => $user->isOwner() ? true : null);
 
+        $connection = config('database.default');
+        $databasePath = config("database.connections.{$connection}.database");
+
+        if ($connection === 'sqlite' && is_string($databasePath)) {
+            $isMemoryDatabase = $databasePath === ':memory:'
+                || str_contains($databasePath, '?mode=memory')
+                || str_contains($databasePath, '&mode=memory')
+                || str_starts_with($databasePath, 'file:');
+
+            if (
+                ! $isMemoryDatabase
+                && ! file_exists($databasePath)
+                && ! file_exists(base_path($databasePath))
+            ) {
+                return;
+            }
+        }
+
         if (! app()->runningInConsole() || Schema::hasTable('permissions')) {
             Permission::pluck('slug')->each(
                 fn (string $slug) => Gate::define($slug, fn ($user) => $user->hasPermission($slug))
