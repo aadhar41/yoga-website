@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Public;
 
 use App\Http\Controllers\Controller;
+use App\Models\ClassSchedule;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
@@ -13,6 +14,11 @@ class ClassScheduleController extends Controller
      */
     public function __invoke(): View
     {
-        return view('public.schedule');
+        $schedules = ClassSchedule::with('programme')
+            ->where('is_active', true)
+            ->orderBy('start_time')
+            ->get();
+
+        return view('public.schedule', compact('schedules'));
     }
 }

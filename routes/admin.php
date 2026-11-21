@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\ClassScheduleController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\MediaController;
 use App\Http\Controllers\Admin\ProfileController;
@@ -25,3 +26,4 @@ Route::prefix('staff')->name('staff.')->middleware('can:manage-staff')->group(fu
 });
 
 Route::resource('programmes', ProgrammeController::class)->except(['show']);
+Route::resource('schedules', ClassScheduleController::class)->except(['show']);
