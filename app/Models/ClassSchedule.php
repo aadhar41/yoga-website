@@ -2,14 +2,11 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class ClassSchedule extends Model
 {
-    use HasFactory;
-
     protected $fillable = [
         'programme_id',
         'title',
@@ -29,6 +26,7 @@ class ClassSchedule extends Model
         ];
     }
 
+    /** @return BelongsTo<Programme, $this> */
     public function programme(): BelongsTo
     {
         return $this->belongsTo(Programme::class);
