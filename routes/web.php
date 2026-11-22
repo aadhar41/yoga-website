@@ -5,6 +5,8 @@ use App\Http\Controllers\Public\ClassScheduleController;
 use App\Http\Controllers\Public\HomeController;
 use App\Http\Controllers\Public\PageController;
 use App\Http\Controllers\Public\ProgrammeController;
+use App\Models\GalleryItem;
+use App\Models\Testimonial;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', HomeController::class)->name('home');
@@ -44,6 +46,24 @@ Route::get('/robots.txt', function () {
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::view('dashboard', 'dashboard')->name('dashboard');
 });
+
+Route::get('/testimonials', function () {
+    $testimonials = Testimonial::where('is_approved', true)
+        ->orderBy('sort_order')
+        ->latest('id')
+        ->get();
+
+    return view('public.testimonials', compact('testimonials'));
+})->name('testimonials');
+
+Route::get('/gallery', function () {
+    $items = GalleryItem::where('is_published', true)
+        ->orderBy('sort_order')
+        ->latest('id')
+        ->get();
+
+    return view('public.gallery', compact('items'));
+})->name('gallery');
 
 Route::prefix('admin')->name('admin.')->middleware(['auth', 'active'])->group(function () {
 

@@ -2,10 +2,12 @@
 
 use App\Http\Controllers\Admin\ClassScheduleController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\GalleryController;
 use App\Http\Controllers\Admin\MediaController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\ProgrammeController;
 use App\Http\Controllers\Admin\StaffController;
+use App\Http\Controllers\Admin\TestimonialController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -27,3 +29,6 @@ Route::prefix('staff')->name('staff.')->middleware('can:manage-staff')->group(fu
 
 Route::resource('programmes', ProgrammeController::class)->except(['show']);
 Route::resource('schedules', ClassScheduleController::class)->except(['show']);
+
+Route::resource('testimonials', TestimonialController::class)->except(['show']);
+Route::resource('gallery', GalleryController::class)->except(['show']);
