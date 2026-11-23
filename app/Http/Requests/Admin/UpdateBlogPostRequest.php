@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Admin;
 
+use App\Models\BlogPost;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
@@ -24,7 +25,7 @@ class UpdateBlogPostRequest extends FormRequest
     public function rules(): array
     {
         $post = $this->route('blog');
-        $postId = is_object($post) ? $post->id : $post;
+        $postId = $post instanceof BlogPost ? $post->getKey() : $post;
 
         return [
             'blog_category_id' => ['nullable', 'exists:blog_categories,id'],

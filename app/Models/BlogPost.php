@@ -3,12 +3,18 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Support\Carbon;
 
+/**
+ * @property Carbon|null $published_at
+ */
 class BlogPost extends Model
 {
+    /** @use HasFactory<Factory<BlogPost>> */
     use HasFactory;
 
     protected $fillable = [
@@ -31,16 +37,22 @@ class BlogPost extends Model
         ];
     }
 
+    /** @return BelongsTo<BlogCategory, $this> */
     public function category(): BelongsTo
     {
         return $this->belongsTo(BlogCategory::class, 'blog_category_id');
     }
 
+    /** @return BelongsTo<User, $this> */
     public function author(): BelongsTo
     {
         return $this->belongsTo(User::class, 'author_id');
     }
 
+    /**
+     * @param  Builder<BlogPost>  $query
+     * @return Builder<BlogPost>
+     */
     public function scopePublished(Builder $query): Builder
     {
         return $query->where('is_published', true)
