@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Public\BlogController;
 use App\Http\Controllers\Public\BookingController;
 use App\Http\Controllers\Public\ClassScheduleController;
 use App\Http\Controllers\Public\HomeController;
@@ -17,6 +18,9 @@ Route::get('/programmes/{programme:slug}', [ProgrammeController::class, 'show'])
 Route::get('/schedule', ClassScheduleController::class)->name('schedule');
 Route::post('/bookings', [BookingController::class, 'store'])->name('bookings.store');
 Route::view('/contact', 'public.contact')->name('contact');
+
+Route::get('/blog', [BlogController::class, 'index'])->name('blog.index');
+Route::get('/blog/{post:slug}', [BlogController::class, 'show'])->name('blog.show');
 
 Route::get('/sitemap.xml', function () {
     $baseUrl = rtrim((string) config('app.url'), '/');
