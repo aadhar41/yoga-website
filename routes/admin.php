@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\BlogPostController;
 use App\Http\Controllers\Admin\ClassScheduleController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\GalleryController;
@@ -32,3 +33,4 @@ Route::resource('schedules', ClassScheduleController::class)->except(['show']);
 
 Route::resource('testimonials', TestimonialController::class)->except(['show']);
 Route::resource('gallery', GalleryController::class)->except(['show']);
+Route::resource('blog', BlogPostController::class)->except(['show']);
