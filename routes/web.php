@@ -3,6 +3,7 @@
 use App\Http\Controllers\Public\BlogController;
 use App\Http\Controllers\Public\BookingController;
 use App\Http\Controllers\Public\ClassScheduleController;
+use App\Http\Controllers\Public\EnquiryController;
 use App\Http\Controllers\Public\HomeController;
 use App\Http\Controllers\Public\PageController;
 use App\Http\Controllers\Public\ProgrammeController;
@@ -17,7 +18,6 @@ Route::get('/programmes', [ProgrammeController::class, 'index'])->name('programm
 Route::get('/programmes/{programme:slug}', [ProgrammeController::class, 'show'])->name('programmes.show');
 Route::get('/schedule', ClassScheduleController::class)->name('schedule');
 Route::post('/bookings', [BookingController::class, 'store'])->name('bookings.store');
-Route::view('/contact', 'public.contact')->name('contact');
 
 Route::get('/blog', [BlogController::class, 'index'])->name('blog.index');
 Route::get('/blog/{post:slug}', [BlogController::class, 'show'])->name('blog.show');
@@ -29,6 +29,11 @@ Route::get('/sitemap.xml', function () {
         ->view('seo.sitemap', ['homeUrl' => $baseUrl.'/'])
         ->header('Content-Type', 'application/xml; charset=UTF-8');
 })->name('sitemap');
+
+Route::get('/contact', [EnquiryController::class, 'create'])->name('contact');
+Route::post('/contact', [EnquiryController::class, 'store'])
+    ->middleware('throttle:10,1')
+    ->name('contact.store');
 
 Route::get('/robots.txt', function () {
     $baseUrl = rtrim((string) config('app.url'), '/');
