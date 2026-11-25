@@ -4,10 +4,13 @@ namespace App\Http\Controllers\Public;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Public\StoreEnquiryRequest;
+use App\Mail\EnquiryConfirmationMail;
+use App\Mail\NewEnquiryAlertMail;
 use App\Models\Enquiry;
 use App\Models\Programme;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\View\View;
 
 class EnquiryController extends Controller
@@ -30,7 +33,10 @@ class EnquiryController extends Controller
         $data['status'] = 'new';
         $data['ip_address'] = $request->ip();
 
-        Enquiry::create($data);
+        $enquiry = Enquiry::create($data)->load('programme');
+
+        Mail::to($enquiry->email)->queue(new EnquiryConfirmationMail($enquiry));
+        Mail::to('deepaajm01@gmail.com')->queue(new NewEnquiryAlertMail($enquiry));
 
         return redirect()
             ->route('contact')
