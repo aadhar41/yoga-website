@@ -119,6 +119,16 @@
                             Bookings
                         </a>
                     @endif
+
+                    @if (Route::has('admin.enquiries.index'))
+                        <p class="px-3 pt-4 pb-1.5 text-[11px] font-semibold uppercase tracking-[0.16em] text-[#C5A66D]/80">
+                            Enquiries
+                        </p>
+                        <a href="{{ route('admin.enquiries.index') }}"
+                        class="flex items-center px-3 py-2.5 rounded-lg transition {{ request()->routeIs('admin.enquiries.*') ? 'bg-[#82977B] text-white font-medium' : 'text-stone-200 hover:bg-white/10' }}">
+                            Enquiry Inbox
+                        </a>
+                    @endif
                 </nav>
             </div>
 

@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\BlogPostController;
 use App\Http\Controllers\Admin\ClassScheduleController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\EnquiryController;
 use App\Http\Controllers\Admin\GalleryController;
 use App\Http\Controllers\Admin\MediaController;
 use App\Http\Controllers\Admin\ProfileController;
@@ -30,6 +31,7 @@ Route::prefix('staff')->name('staff.')->middleware('can:manage-staff')->group(fu
 
 Route::resource('programmes', ProgrammeController::class)->except(['show']);
 Route::resource('schedules', ClassScheduleController::class)->except(['show']);
+Route::resource('enquiries', EnquiryController::class)->only(['index', 'show', 'update', 'destroy']);
 
 Route::resource('testimonials', TestimonialController::class)->except(['show']);
 Route::resource('gallery', GalleryController::class)->except(['show']);
