@@ -10,11 +10,13 @@ A yoga and holistic-wellness website built with Laravel, Livewire, and Blade. It
 - About and specialised-wellness pages
 - Programme catalogue grouped by category, with individual programme details
 - Class schedule and public booking-request form
+- Wellness blog with article pages, plus public gallery and testimonials
 - Contact page, canonical metadata, `robots.txt`, and `sitemap.xml`
 
 ### Admin area
 
 - Authenticated admin area at `/admin`
+- Management for programmes, class schedules, blog posts, testimonials, gallery items, and enquiries
 - Instructor profile editor for biography, qualifications, portrait, and publication status
 - Media library for uploading, browsing, copying URLs, and deleting images
 - Staff directory and staff creation, restricted by the `manage-staff` permission
@@ -24,18 +26,34 @@ Booking requests can be submitted from the public website. Admin booking review 
 
 ## Screenshots
 
-These screenshots show the public website using local application content.
+The following captures are from `public/images/Screens` and show the public website with local application content.
 
 <p>
-  <img src="docs/screenshots/homepage.png" alt="Yoga with Deepashree homepage" width="720">
+  <img src="public/images/Screens/home-2026-11-26-21_49_32.png" alt="Yoga with Deepashree homepage" width="720">
 </p>
 
 <p>
-  <img src="docs/screenshots/about.png" alt="About the instructor and yoga practice" width="720">
+  <img src="public/images/Screens/about-2026-11-26-21_50_10.png" alt="About the instructor and yoga practice" width="720">
 </p>
 
 <p>
-  <img src="docs/screenshots/programmes.png" alt="Programme catalogue grouped by category" width="720">
+  <img src="public/images/Screens/programmes-2026-11-26-21_50_23.png" alt="Programme catalogue grouped by category" width="720">
+</p>
+
+<p>
+  <img src="public/images/Screens/programmes-ashtanga-primary-series-foundations-2026-11-26-21_51_35.png" alt="Ashtanga Primary Series Foundations programme details" width="720">
+</p>
+
+<p>
+  <img src="public/images/Screens/schedule-2026-11-26-21_50_41.png" alt="Class schedule and venues" width="720">
+</p>
+
+<p>
+  <img src="public/images/Screens/blog-2026-11-26-21_50_53.png" alt="Wellness blog listing" width="720">
+</p>
+
+<p>
+  <img src="public/images/Screens/blog-consequatur-sit-it-2026-11-26-21_52_36.png" alt="Wellness blog article" width="720">
 </p>
 
 ## Stack and tools
@@ -108,6 +126,8 @@ After signing in with an active account:
 - `routes/settings.php` contains authenticated account settings and the passkey discovery route.
 - `app/Http/Controllers` and `app/Http/Requests` contain HTTP controllers and request validation.
 - `app/Models` contains Eloquent models; Livewire features and reusable Blade views follow the existing Laravel and Livewire patterns.
+- `public/assests` contains the supplied brand logos, icons, favicons, and web manifest. The directory name is intentionally kept as it exists in the project.
+- `public/images/Screens` contains the public-page screenshots used above.
 - Keep credentials in the local `.env`; never commit environment secrets.
 
 ## SEO and production configuration

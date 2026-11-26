@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+<defs>
+ <linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#294D40"/><stop offset="1" stop-color="#18392F"/></linearGradient>
+</defs>
+<circle cx="256" cy="256" r="244" fill="url(#g)"/>
+<circle cx="256" cy="256" r="224" fill="none" stroke="#9CB99A" stroke-width="5"/>
+<path d="M126 222 A130 130 0 0 1 386 222" fill="none" stroke="#9CB99A" stroke-width="8" stroke-linecap="round"/>
+<path d="M140 330 Q184 263 225 314 Q256 351 287 314 Q328 263 372 330 Q317 365 256 366 Q195 365 140 330Z" fill="#9CB99A"/>
+<path d="M168 342 Q206 374 256 374 Q306 374 344 342 Q315 404 256 411 Q197 404 168 342Z" fill="#E9E8D9"/>
+<circle cx="256" cy="176" r="25" fill="#F8F7F1"/>
+<path d="M222 216 Q256 194 290 216 Q305 241 300 274 Q293 298 256 316 Q219 298 212 274 Q207 241 222 216Z" fill="#F8F7F1"/>
+<path d="M220 239 Q203 278 174 298 Q207 303 239 280 M292 239 Q309 278 338 298 Q305 303 273 280" fill="none" stroke="#F8F7F1" stroke-width="16" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M210 319 Q256 343 302 319" fill="none" stroke="#9CB99A" stroke-width="10" stroke-linecap="round"/>
+<path d="M106 352 Q154 328 196 349 M406 352 Q358 328 316 349" fill="none" stroke="#9CB99A" stroke-width="7" stroke-linecap="round"/>
+</svg>

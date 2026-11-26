@@ -4,13 +4,10 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex items-center justify-between h-20">
             <!-- Brand -->
-            <a href="{{ route('home') }}" class="flex items-center gap-2.5">
-                <span class="w-9 h-9 rounded-full bg-[#29483C] text-[#FAF8F2] flex items-center justify-center font-serif text-lg font-semibold">
-                    Y
-                </span>
-                <span class="font-serif text-xl sm:text-2xl font-semibold tracking-tight text-[#29483C]">
-                    {{ config('app.name') }}
-                </span>
+            <a href="{{ route('home') }}" class="flex items-center">
+                <img src="{{ asset('assests/logo-nav-400x90.png') }}"
+                     alt="{{ config('app.name') }}"
+                     class="h-10 w-auto sm:h-11">
             </a>
 
             <!-- Desktop Navigation -->
