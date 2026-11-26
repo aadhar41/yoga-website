@@ -31,6 +31,10 @@
                    class="transition {{ request()->is('schedule*') ? 'text-[#29483C] font-semibold underline decoration-[#C5A66D] decoration-2 underline-offset-8' : 'text-stone-600 hover:text-[#29483C]' }}">
                     Schedule
                 </a>
+                <a href="{{ route('blog.index') }}"
+                   class="transition {{ request()->routeIs('blog.*') ? 'text-[#29483C] font-semibold underline decoration-[#C5A66D] decoration-2 underline-offset-8' : 'text-stone-600 hover:text-[#29483C]' }}">
+                    Blog
+                </a>
                 <a href="{{ url('/contact') }}"
                    class="transition {{ request()->is('contact*') ? 'text-[#29483C] font-semibold underline decoration-[#C5A66D] decoration-2 underline-offset-8' : 'text-stone-600 hover:text-[#29483C]' }}">
                     Contact
@@ -79,30 +83,33 @@
          @click.away="mobileMenuOpen = false"
          style="display: none;"
          class="md:hidden bg-[#FAF8F2] border-b border-stone-200 px-4 pt-3 pb-6 shadow-lg">
-        <!-- Desktop Navigation in resources/views/partials/public/navbar.blade.php -->
-        <nav aria-label="Primary" class="hidden md:flex items-center gap-7 text-sm font-medium">
+        <nav aria-label="Primary" class="flex flex-col items-start gap-4 text-sm font-medium">
             <a href="{{ route('home') }}"
-            class="transition {{ request()->routeIs('home') ? 'text-[#29483C] font-semibold underline decoration-[#C5A66D] decoration-2 underline-offset-8' : 'text-stone-600 hover:text-[#29483C]' }}">
+               class="transition {{ request()->routeIs('home') ? 'text-[#29483C] font-semibold underline decoration-[#C5A66D] decoration-2 underline-offset-8' : 'text-stone-600 hover:text-[#29483C]' }}">
                 Home
             </a>
             <a href="{{ route('about') }}"
-            class="transition {{ request()->routeIs('about') ? 'text-[#29483C] font-semibold underline decoration-[#C5A66D] decoration-2 underline-offset-8' : 'text-stone-600 hover:text-[#29483C]' }}">
+               class="transition {{ request()->routeIs('about') ? 'text-[#29483C] font-semibold underline decoration-[#C5A66D] decoration-2 underline-offset-8' : 'text-stone-600 hover:text-[#29483C]' }}">
                 About
             </a>
             <a href="{{ route('expertise') }}"
-            class="transition {{ request()->routeIs('expertise') ? 'text-[#29483C] font-semibold underline decoration-[#C5A66D] decoration-2 underline-offset-8' : 'text-stone-600 hover:text-[#29483C]' }}">
+               class="transition {{ request()->routeIs('expertise') ? 'text-[#29483C] font-semibold underline decoration-[#C5A66D] decoration-2 underline-offset-8' : 'text-stone-600 hover:text-[#29483C]' }}">
                 Specialised Wellness
             </a>
             <a href="{{ route('programmes.index') }}"
-            class="transition {{ request()->routeIs('programmes.*') ? 'text-[#29483C] font-semibold underline decoration-[#C5A66D] decoration-2 underline-offset-8' : 'text-stone-600 hover:text-[#29483C]' }}">
+               class="transition {{ request()->routeIs('programmes.*') ? 'text-[#29483C] font-semibold underline decoration-[#C5A66D] decoration-2 underline-offset-8' : 'text-stone-600 hover:text-[#29483C]' }}">
                 Programmes
             </a>
             <a href="{{ route('schedule') }}"
-            class="transition {{ request()->routeIs('schedule') ? 'text-[#29483C] font-semibold underline decoration-[#C5A66D] decoration-2 underline-offset-8' : 'text-stone-600 hover:text-[#29483C]' }}">
+               class="transition {{ request()->routeIs('schedule') ? 'text-[#29483C] font-semibold underline decoration-[#C5A66D] decoration-2 underline-offset-8' : 'text-stone-600 hover:text-[#29483C]' }}">
                 Schedule
             </a>
+            <a href="{{ route('blog.index') }}"
+               class="transition {{ request()->routeIs('blog.*') ? 'text-[#29483C] font-semibold underline decoration-[#C5A66D] decoration-2 underline-offset-8' : 'text-stone-600 hover:text-[#29483C]' }}">
+                Blog
+            </a>
             <a href="{{ route('contact') }}"
-            class="transition {{ request()->routeIs('contact') ? 'text-[#29483C] font-semibold underline decoration-[#C5A66D] decoration-2 underline-offset-8' : 'text-stone-600 hover:text-[#29483C]' }}">
+               class="transition {{ request()->routeIs('contact') ? 'text-[#29483C] font-semibold underline decoration-[#C5A66D] decoration-2 underline-offset-8' : 'text-stone-600 hover:text-[#29483C]' }}">
                 Contact
             </a>
         </nav>
