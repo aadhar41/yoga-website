@@ -129,6 +129,16 @@
                             Enquiry Inbox
                         </a>
                     @endif
+
+                    @if (Route::has('admin.audit-logs.index'))
+                        <p class="px-3 pt-4 pb-1.5 text-[11px] font-semibold uppercase tracking-[0.16em] text-[#C5A66D]/80">
+                            System &amp; Governance
+                        </p>
+                        <a href="{{ route('admin.audit-logs.index') }}"
+                        class="flex items-center px-3 py-2.5 rounded-lg transition {{ request()->routeIs('admin.audit-logs.*') ? 'bg-[#82977B] text-white font-medium' : 'text-stone-200 hover:bg-white/10' }}">
+                            Audit Log
+                        </a>
+                    @endif
                 </nav>
             </div>
 
