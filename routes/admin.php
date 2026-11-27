@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\AuditLogController;
 use App\Http\Controllers\Admin\BlogPostController;
 use App\Http\Controllers\Admin\ClassScheduleController;
 use App\Http\Controllers\Admin\DashboardController;
@@ -22,6 +23,7 @@ Route::delete('media/{filename}', [MediaController::class, 'destroy'])
     ->name('media.destroy');
 
 Route::get('/', DashboardController::class)->name('dashboard');
+Route::get('audit-logs', AuditLogController::class)->name('audit-logs.index');
 
 Route::prefix('staff')->name('staff.')->middleware('can:manage-staff')->group(function () {
     Route::get('/', [StaffController::class, 'index'])->name('index');

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\UpdateEnquiryRequest;
 use App\Models\Enquiry;
+use App\Services\AuditLogger;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -51,7 +52,21 @@ class EnquiryController extends Controller
 
     public function update(UpdateEnquiryRequest $request, Enquiry $enquiry): RedirectResponse
     {
+        $previousStatus = $enquiry->status;
         $enquiry->update($request->validated());
+
+        if ($enquiry->wasChanged('status')) {
+            AuditLogger::record(
+                'updated',
+                'Updated Enquiry: '.$enquiry->name,
+                $enquiry,
+                [
+                    'old' => ['status' => $previousStatus],
+                    'new' => ['status' => $enquiry->status],
+                ],
+                $request,
+            );
+        }
 
         return back()->with('status', 'Enquiry status updated to '.ucfirst($enquiry->status).'.');
     }
