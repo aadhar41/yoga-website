@@ -2,7 +2,13 @@
 
 namespace App\Providers;
 
+use App\Models\BlogPost;
 use App\Models\Permission;
+use App\Models\Programme;
+use App\Models\Role;
+use App\Models\Testimonial;
+use App\Models\User;
+use App\Observers\AuditObserver;
 use Carbon\CarbonImmutable;
 use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\DB;
@@ -27,6 +33,12 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Schema::defaultStringLength(191);
+
+        User::observe(AuditObserver::class);
+        Programme::observe(AuditObserver::class);
+        BlogPost::observe(AuditObserver::class);
+        Testimonial::observe(AuditObserver::class);
+        Role::observe(AuditObserver::class);
 
         // Owner passes every check
         Gate::before(fn ($user) => $user->isOwner() ? true : null);

@@ -21,7 +21,7 @@ class AuditLogger
         $req = $request ?? request();
 
         return AuditLog::create([
-            'user_id' => $req->user()?->getAuthIdentifier(),
+            'user_id' => $req->user()?->getAuthIdentifier() ?? auth()->id(),
             'action' => $action,
             'auditable_type' => $subject ? $subject->getMorphClass() : null,
             'auditable_id' => $subject?->getKey(),
