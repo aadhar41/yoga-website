@@ -3,7 +3,32 @@
     $pageDescription = 'Send a session enquiry, ask about batch timings, or connect with Yogacharya Deepashree Gaur for personalised yoga and wellness guidance.';
 @endphp
 
+@php
+    $localBusinessSchema = [
+        '@context' => 'https://schema.org',
+        '@type' => 'LocalBusiness',
+        'name' => config('app.name') . ' — Yogacharya Deepashree Gaur',
+        'url' => route('contact'),
+        'telephone' => '+91-9717846638',
+        'email' => 'deepaajm01@gmail.com',
+        'address' => [
+            '@type' => 'PostalAddress',
+            'addressLocality' => 'Jaipur',
+            'addressRegion' => 'Rajasthan',
+            'addressCountry' => 'IN',
+        ],
+    ];
+@endphp
+
 <x-public-layout :title="$pageTitle">
+    <x-slot:seo>
+        <x-public.seo
+            title="Contact & Enquiry — {{ config('app.name') }}"
+            description="Send a session enquiry, ask about batch timings, or connect with Yogacharya Deepashree Gaur."
+            :schema="$localBusinessSchema"
+        />
+    </x-slot:seo>
+
     <x-slot:meta>
         <meta name="description" content="{{ $pageDescription }}">
         <link rel="canonical" href="{{ route('contact') }}">
