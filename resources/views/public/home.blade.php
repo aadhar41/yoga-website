@@ -14,7 +14,33 @@
     );
 @endphp
 
+@php
+    $personSchema = [
+        '@context' => 'https://schema.org',
+        '@type' => 'Person',
+        'name' => 'Yogacharya Deepashree Gaur',
+        'jobTitle' => 'Certified Yoga Instructor & Holistic Wellness Guide',
+        'url' => url('/'),
+        'telephone' => '+91-9717846638',
+        'email' => 'deepaajm01@gmail.com',
+        'address' => [
+            '@type' => 'PostalAddress',
+            'addressLocality' => 'Jaipur',
+            'addressRegion' => 'Rajasthan',
+            'addressCountry' => 'IN',
+        ],
+    ];
+@endphp
+
 <x-public-layout :title="$pageTitle">
+    <x-slot:seo>
+        <x-public.seo
+            title="Yogacharya Deepashree Gaur — Yoga & Holistic Wellness"
+            description="Personalised yoga batches, pranayama, meditation, and holistic wellness programmes with Yogacharya Deepashree Gaur."
+            :schema="$personSchema"
+        />
+    </x-slot:seo>
+
     <x-slot:meta>
         <meta name="description" content="{{ $pageDescription }}">
         <link rel="canonical" href="{{ $canonicalUrl }}">
